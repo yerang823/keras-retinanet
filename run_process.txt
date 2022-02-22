@@ -1,0 +1,41 @@
+at exp3_retinanet directory 
+
+0. train_test_split.py (5-fold)
+python train_test_split_txt.py
+
+#1.make_txt.py 
+#-make train.txt, test_label.txt, test.txt
+
+make_txt_devide.py(5-fold)
+-make csv files -> train.csv, test.csv
+
+#2.txt to csv (except directory)
+#cp train.txt train.csv
+#cp test.txt test.csv
+#cp test_label.txt test_label.csv
+
+
+
+2. train.py (set img size and make txt)
+python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv data/txt/train.csv data/txt/class_name.csv
+
+(5-fold)
+python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv data/image/0/txt/train.csv data/1fold/txt/class_name.csv; python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv data/image/1/txt/train.csv data/1fold/txt/class_name.csv; python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv data/image/2/txt/train.csv data/1fold/txt/class_name.csv; python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv data/image/3/txt/train.csv data/1fold/txt/class_name.csv; python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv data/image/4/txt/train.csv data/1fold/txt/class_name.csv;
+
+(5-fold edit)
+python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv ./train0.csv data/1fold/txt/class_name.csv; python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv ./train1.csv data/1fold/txt/class_name.csv; python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv ./train2.csv data/1fold/txt/class_name.csv; python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv ./train3.csv data/1fold/txt/class_name.csv; python keras_retinanet/bin/train.py --steps=1000 --workers=0 csv ./train4.csv data/1fold/txt/class_name.csv;
+
+(5-fold final)
+python keras_retinanet/bin/train.py --snapshot-path=snapshots0 --steps=1000 --workers=0 csv data/image/0/txt/train.csv data/image/class_name.csv; python keras_retinanet/bin/train.py --snapshot-path=snapshots1 --steps=1000 --workers=0 csv data/image/1/txt/train.csv data/image/class_name.csv; python keras_retinanet/bin/train.py --snapshot-path=snapshots2 --steps=1000 --workers=0 csv data/image/2/txt/train.csv data/image/class_name.csv; python keras_retinanet/bin/train.py --snapshot-path=snapshots3 --steps=1000 --workers=0 csv data/image/3/txt/train.csv data/image/class_name.csv; python keras_retinanet/bin/train.py --snapshot-path=snapshots4 --steps=1000 --workers=0 csv data/image/4/txt/train.csv data/image/class_name.csv;
+
+
+
+3. convert model
+(5-fold)
+python keras_retinanet/bin/convert_model.py ./snapshots0/resnet50_csv_50.h5 ./final_model/retinanet50_cv0_3.h5; python keras_retinanet/bin/convert_model.py ./snapshots1/resnet50_csv_50.h5 ./final_model/retinanet50_cv1_3.h5; python keras_retinanet/bin/convert_model.py ./snapshots2/resnet50_csv_50.h5 ./final_model/retinanet50_cv2_3.h5; python keras_retinanet/bin/convert_model.py ./snapshots3/resnet50_csv_50.h5 ./final_model/retinanet50_cv3_3.h5; python keras_retinanet/bin/convert_model.py ./snapshots4/resnet50_csv_50.h5 ./final_model/retinanet50_cv4_3.h5
+
+
+4. ResNet50RetinaNet.py (predict test image and save img, txt)
+python ResNet50RetinaNet.py 
+
+5. evaluate_classification.py
