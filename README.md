@@ -2,6 +2,10 @@
 ![image](https://user-images.githubusercontent.com/97432613/158131314-1c5be973-9ec5-4cc8-bc30-5f86fe8b42de.png)
 
 
+# Architecture
+![image](https://user-images.githubusercontent.com/97432613/158131513-b24cb5f3-b916-4fe9-9ad8-494b123650cc.png)
+
+
 # Usage 
 
 ### Preprocess
